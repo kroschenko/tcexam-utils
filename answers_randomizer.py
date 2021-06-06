@@ -28,16 +28,11 @@ root = tree.getroot()
 module = root[1].find("module")
 
 module.find("name").text = args.module_new_name
-question_count = 0
 subjects = module.findall("subject")
 for subject in subjects:
-    # print(">>>>>>"+subject.find("name").text)
     questions = subject.findall("question")
-    question_count += len(questions)
     for question in questions:
-        # print(question.find("description").text)
         answers = question.findall("answer")
-        print(len(answers))
         correct_answer = answers[0]
         random_index = random.randint(0, len(answers)-1)
         correct_desc = correct_answer.find("description").text
@@ -51,4 +46,4 @@ for subject in subjects:
         answers[random_index].find("enabled").text = correct_enabled
 
 tree.write(args.fixed_xml, encoding="UTF-8")
-print(question_count)
+
